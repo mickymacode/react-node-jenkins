@@ -43,7 +43,7 @@ pipeline {
             sh "echo '${dockerCmd}' > docker-script.sh"
             sh "scp -o StrictHostKeyChecking=no docker-script.sh ec2-user@13.211.190.16:/home/ec2-user"
             sh "ssh -o StrictHostKeyChecking=no ec2-user@13.211.190.16 'bash /home/ec2-user/docker-script.sh'"
-            //这个位置卡了很久，不知道为什么用下面的写法，docker pull和run的指令只会在Jenkins server里运行，跳ec2 instance，虽然明明连ec2是成功的
+            //用下面的写法，docker pull和run的指令只会在Jenkins server里运行，跳ec2 instance，虽然明明连ec2是成功的
             //但是换成上面这么写，把指令写在script里，拷贝到ec2里，再运行，就可以了。
             //chatgpt写的是确保运行的环境在ec2里
             // sh 'ssh -o StrictHostKeyChecking=no ec2-user@13.211.190.16 hostname ${dockerCmd}'
